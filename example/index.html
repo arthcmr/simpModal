@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+	    <title>simpModal Documentation and Examples</title>
+	    
+	    <link rel="stylesheet" type="text/css" href="css/style.css">
+	    <link rel="stylesheet" type="text/css" href="css/simpmodal.css">
+	    
+	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	    <script src="../jquery.simpModal.min.js"></script>
+	    
+    </head>
+    
+    <body>
+    	<h1>simpModal</h1>
+
+        <p>simpModal is a simple modal jquery plugin based on leanModal by FinelySliced (<a href="http://leanmodal.finelysliced.com.au/">See their website</a>). I built simpModal because I wanted flexibility. Many of the modal plugins I've seen out there rely on lots of HTML markup, which makes them too complex for simple things. Plus, I wanted to be able to code my CSS separately from the plugin, which certainly makes it a lot more designer-friendly. Finally, I wanted the plugin to add/destroy any necessary HTML tags it may need, so that I wouldn't have unnecessary tags when a modal isn't visible.</p>
+        
+        <div class="column-two-half left">
+	        <p><strong>Best things about this plugin so far:</strong></p>
+	        <ul>
+		        <li>Simple</li>
+		        <li>Flexible width and height</li>
+		        <li>Independent CSS</li>
+		        <li>Ajax Support</li>
+		        <li>Image Free</li>
+		        <li>Very light (less than 4Kb)</li>
+		        <li>Multiple instances on the same page</li>
+		        <li>Many options</li>
+		        <li>Very easy to use</li>
+	        </ul>
+        </div>
+        <div class="column-two-half right">
+	        <p><strong>Yet to be improved:</strong></p>
+	        <ul>
+		        <li>No support for old IE browsers</li>
+		        <li>No iframe support</li>
+		        <li>No gallery support</li>
+	        </ul>
+        </div>
+        <div class="clear"></div>
+    
+        <h1>Usage</h1>
+
+        <p>Using simpModal is quite simple and you can start with something as simple as this:</p>
+        
+        <pre>$.simpModal({
+        content: "Simple Message"
+        });</pre>
+        
+        <p><button onclick='$.simpModal({content: "Simple Message"});'>Click here to see simpModal in action</button></p>
+        
+        <p>However, there are plenty of options you may find useful:</p>
+        
+        <pre>$.simpModal(<i>options</i>);</pre>
+
+        <p>Default options:</p>
+        <pre>$.simpModal({
+	top: 100,
+	overlay: 0.4,
+	extraClass: null,
+	element: null,
+	link: null,
+	file: null,
+	params: null,
+	method: 'post',
+	content: null,
+	width: null,
+	closeButton: false,
+	loadingMessage: "Loading...",
+	speed: 200,
+	transition: 'fade',
+	clickEnter: true,
+	closeEsc: true,
+	close: false
+	});</pre>
+
+        <hr>
+        
+         <h2>Examples</h2>
+
+         <h3>Close Button</h3>
+ <pre>$.simpModal({
+        content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
+        closeButton: true
+        });</pre>
+
+        <button onclick='$.simpModal({content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.", closeButton: true});'>Modal with close button</button>
+        
+        <h3>Extra Class</h3>
+        <p>You may apply any class to your modal so that you can have multiple modal styles</p>
+ <pre>$.simpModal({
+        ...
+        extraClass: 'narrow'
+        });</pre>
+
+        <button onclick='$.simpModal({content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.", closeButton: true, extraClass:"narrow"});'>Class 'narrow'!</button>
+        <button onclick='$.simpModal({content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.", closeButton: true, extraClass:"wide"});'>Class 'wide'!</button>
+        <button onclick='$.simpModal({content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.", extraClass:"dark"});'>Class 'dark'!</button>
+        
+        <h3>Overlay transparency</h3>
+ <pre>$.simpModal({
+        ...
+        overlay: 1
+        });</pre>
+
+        <button onclick='$.simpModal({content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.", overlay: 1, extraClass:"narrow"});'>Overlay 1!</button>
+        <button onclick='$.simpModal({content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.", overlay: 0.5, extraClass:"narrow"});'>Overlay 0.5!</button>
+        <button onclick='$.simpModal({content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.", overlay: 0, extraClass:"narrow"});'>Overlay 0!</button>
+        
+        
+        <h3>Load contents from another element (hidden or not)</h3>
+
+        <div id="element" contentEditable="true" class='contentEditable'>This div's id is "element". Type anything you want here and click the button below. The modal will contain these words =)</div>
+        <pre>$.simpModal({
+        ...
+        element: $("#element")
+        });</pre>
+
+        <button onclick='$.simpModal({ element: $("#element") });'>Open modal with contents from #element</button>
+        
+        <h3>Load file (ajax)</h3>
+
+        <p>It supports AJAX!</p> <pre>$.simpModal({
+        ...
+        file: "file.html",
+        loadingMessage: "Loading a file: file.html"
+        });</pre>
+
+        <button onclick='$.simpModal({ file: "file.html", loadingMessage: "Loading a file: file.html", closeButton: true, extraClass: "narrow" });'>Load File</button>
+        
+        <h3>Custom size</h3>
+ <pre>$.simpModal({
+        ...
+        width: "487px"
+        });</pre>
+
+        <button onclick='$.simpModal({ width: "487px", content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>Modal 487px</button>
+        <button onclick='$.simpModal({ width: "666px", content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>Modal 666px</button>
+        <button onclick='$.simpModal({ width: "200px", content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>Modal 200px</button>
+        
+        
+         <h3>Control animation speed</h3>
+ <pre>$.simpModal({
+        ...
+        speed: 2000
+        });</pre>
+
+        <button onclick='$.simpModal({ speed: 2000, content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>2 seconds</button>
+        <button onclick='$.simpModal({ speed: 500, content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>0.5 seconds</button>
+        <button onclick='$.simpModal({ speed: 20, content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>20 miliseconds</button>
+        
+         <h3>Lots and lots of contents</h3>
+         <p>Many modal plugins seem useless when it comes to displaying lots of content. Not this one. Check it out:</p>
+
+        <button onclick='$.simpModal({ extraClass: "dark", content: "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. " });'>Very tall</button>
+        <button onclick='$.simpModal({ closeButton: true, extraClass:"narrow", content: "At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. " });'>Very very tall</button>
+            
+        <h3>Choose your transition</h3>
+        <p>'fade' is the default transition but you may choose another one. Currently supported transitions: fade, slide, slideUp, slideRight. More to come.</p>
+ <pre>$.simpModal({
+        ...
+        speed: 400,
+        transition: 'slide'
+        });</pre>
+
+        <button onclick='$.simpModal({ speed: 400, transition: "slide", content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>'slide' transition</button> <button onclick='$.simpModal({ speed: 600, transition: "slideUp", content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>'slideUp' transition</button> <button onclick='$.simpModal({ speed: 400, transition: "slideRight", content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>'slideRight' transition</button> <button onclick='$.simpModal({ speed: 600, transition: "fade", content: "Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat." });'>'fade' transition (default)</button>
+        
+        <h3>Keypress events: Enter and Esc keys</h3>
+        <p>What happens when you the Enter or Escape keys are pressed? The modal may close, form may be submitted or something else may happen: it's up to you. By default, Esc closes the modal and Enter "clicks" the submit button (when there is one)</p>
+ <pre>$.simpModal({
+        ...
+        enterButton: "first" //"click" the first button when Enter key is pressed
+        });</pre>
+
+            <div id="elementoenter" style="display:none">
+                Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. <p><button onclick='alert("It works")'>Try me!</button></p>
+            </div>
+            
+            <button onclick='$.simpModal({ clickEnter: "first", speed: 400, transition: "slide", element: $("#elementoenter") });'>Click button when the Enter key is pressed</button>
+            
+            <pre>$.simpModal({
+        ...
+        closeEsc: false
+        });</pre>
+            
+            <button onclick='$.simpModal({ closeEsc: false, content: "Try pressing Escape here and nothing happens." });'>Esc key disabled</button>
+            
+            <h3>Close modal buttons</h3>
+            <p>Adding the attribute <strong>data-close="true"</strong> to any tag creates a link that closes the modal when clicked</p>
+ <pre>$.simpModal({
+        ...
+        enterButton: "first"
+        });</pre>
+
+            <div id="elementodataclose" style="display:none">
+                <p>How do you want to close it? Click outside, click on the "Cancel" button, hit the Escape Key, hit ENTER, or <a data-close="true">click here</a></p><p align="center"><button data-close="true">Cancel</button></p>
+            </div>
+            
+            <button onclick='$.simpModal({ clickEnter: "first", extraClass: "narrow", element: $("#elementodataclose") });'>Abrir modal</button>
+            
+            <h3>Close modal programmatically</h3>
+            <p>Sometimes we just want to close a modal automatically or in some other circumnstances. In that case, just do this:</p>
+            
+            <pre>$.simpModal({ close: true });</pre>
+            
+        <hr>
+        <p>That's basically it! If you have any questions/suggestions, just drop me a line: <a href="mailto:arthurcamara@gmail.com">arthurcamara@gmail.com</a></p>
+    </body>
+
+</html>
