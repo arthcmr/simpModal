@@ -1,0 +1,8 @@
+You may use simpModal under the terms of either the MIT License or 
+the GNU General Public License (GPL) Version 2.
+
+You are free to use simpModal in both personal or commercial. If you have any questions, drop me a line: arthurcamara@gmail.com
+
+Licenses
+MIT License (MIT-LICENSE.txt)
+GPL (GPL-LICENSE.txt)
