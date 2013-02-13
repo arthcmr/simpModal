@@ -28,32 +28,77 @@
         </ul>
       </header>
       <section>
-        <h3>Welcome to GitHub Pages.</h3>
+        <h1>simpModal</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>simpModal is a simple modal jquery plugin based on leanModal by FinelySliced (<a href="http://leanmodal.finelysliced.com.au/">Visit their page</a>). I built simpModal because I wanted flexibility. Many of the modal plugins I've seen out there rely on lots of HTML markup, which makes them too complex for simple things. Plus, I wanted to be able to code my CSS separately from the plugin, which certainly makes it a lot more designer-friendly. Finally, I wanted the plugin to add/destroy any necessary HTML tags it uses, so that I wouldn't have unnecessary tags flying around my code when a modal isn't visible.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+<p>Using simpModal is quite simple and you can start with something as simple as this:</p>
+
+<pre><code>$.simpModal({ content: "Simple Message" });
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<hr><h2>Features</h2>
 
-<h3>Designer Templates</h3>
+<ul>
+<li>Simple</li>
+<li>Flexible width and height</li>
+<li>Independent CSS</li>
+<li>Ajax Support</li>
+<li>Image Free</li>
+<li>Very light (less than 4Kb)</li>
+<li>Multiple instances on the same page</li>
+<li>Many options</li>
+<li>Very easy to use</li>
+</ul><h3>Options</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<p>There are many options, but not enough to make it confusing. It's actually quite simple to use them. Take a look at the default options:</p>
 
-<h3>Rather Drive Stick?</h3>
+<pre><code>$.simpModal({
+    top: 100,
+    overlay: 0.4,
+    extraClass: null,
+    element: null,
+    link: null,
+    file: null,
+    params: null,
+    method: 'post',
+    content: null,
+    width: null,
+    closeButton: false,
+    loadingMessage: "Loading...",
+    speed: 200,
+    transition: 'fade',
+    clickEnter: true,
+    closeEsc: true,
+    close: false
+    });
+</code></pre>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h2>Examples</h2>
 
-<h3>Authors and Contributors</h3>
+<h3>Show Close Button</h3>
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>You may want to display a nice looking button:</p>
 
-<h3>Support or Contact</h3>
+<pre><code>$.simpModal({
+        content: "Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.",
+        closeButton: true
+        });
+</code></pre>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<h3>Extra Class</h3>
+
+<p>You may apply any class to your modal so that you can have multiple modal styles</p>
+
+<pre><code>$.simpModal({
+        ...
+        extraClass: 'narrow'
+        });
+</code></pre>
+
+<h2>Support/Contact</h2>
+
+<p>That's basically it! If you have any questions/suggestions, just drop me a line: <a href="mailto:arthurcamara@gmail.com">arthurcamara@gmail.com</a></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/arthurcamara1">arthurcamara1</a></p>
