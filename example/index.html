@@ -124,11 +124,13 @@
 
         <p>It supports AJAX!</p> <pre>$.simpModal({
         ...
-        file: "file.html",
-        loadingMessage: "Loading a file: file.html"
+        ajax: {
+        	file: "file.php",
+        	loadingMessage: "Loading a file: file.php"
+        	}
         });</pre>
 
-        <button onclick='$.simpModal({ file: "file.html", loadingMessage: "Loading a file: file.html", closeButton: true, extraClass: "narrow" });'>Load File</button>
+        <button onclick='$.simpModal({ ajax: { file: "file.php", loadingMessage: "Loading a file: file.php" }, closeButton: true, extraClass: "narrow" });'>Load File</button>
         
         <h3>Custom size</h3>
  <pre>$.simpModal({

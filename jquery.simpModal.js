@@ -10,7 +10,7 @@
 				loading: 'loading',
 				close_button: 'close_button',
                 dataclose_parameter: 'data-close',
-                dataclose_value: 'true',
+                dataclose_value: 'true'
 			}; 
 			
 			/* default options */
@@ -20,19 +20,24 @@
 				extraClass: null,
 				element: null,
 				link: null,
-				file: null,
-				params: null,
-				method: 'post',
+				ajax: {},
 				content: null,
 				width: null,
 				closeButton: false,
-				loadingMessage: "Carregando...",
 				speed: 200,
 				transition: 'fade',
-                clickEnter: true,
-                closeEsc: true
+                clickEnter: false,
+                closeEsc: true,
+                close: false,
+                beforeOpen: null,
+                afterClose: null
 			};
 			options = $.extend(defaults, options); 
+			
+			if(options.close === true) {
+				close_modal();
+				return;
+			}
 			
 			/* add necessary html markup */
 			var modal_all = $("<div id='" + definitions.modal_wrapper + "' class='" + definitions.modal_wrapper + "'><div id='" + definitions.modal_overlay + "' class='" + definitions.modal_overlay + "'></div><div id='" + definitions.modal + "' class='" + definitions.modal + "'></div></div>");
@@ -51,7 +56,8 @@
                 "right": "0px",
                 "height": "100%",
                 "width": "100%",
-                "overflow-y": "auto"
+                "overflow-y": "auto",
+                "overflow-x" : "hidden"
             });
             overlay.css({
                 "position": "fixed",
@@ -95,29 +101,68 @@
 			} 
 			
 			/* Open Modal or load AJAX */
-			if (options.file === null) {
+			if ($.isEmptyObject(options.ajax)) {
 				close_button(); //add close button if necessary
 				open_modal();
 				return;
 			} else {
 				//loading message
-				loading = "<div class='" + definitions.loading + "'>" + options.loadingMessage + "</div>";
-				modal.html(loading);
-				open_modal();
-				var params = {};
-				if (options.params !== null) {
-					params = options.params;
+				var ajax_defaults = {
+					file: null,
+					method: 'post',
+					params: null,
+					loadingMessage: null,
+					beforeLoad: null,
+					onError: null,
+					onSuccess: null
+				};
+				
+				var ajax = $.extend(ajax_defaults, options.ajax); 				
+				var openAfter = true;
+				
+				if (ajax.loadingMessage !== null) {
+					loading = "<div class='" + definitions.loading + "'>" + ajax.loadingMessage + "</div>";
+					modal.html(loading);
+					open_modal();
+					openAfter = false;
 				}
+				
+				var params = {};
+				if (ajax.params !== null) {
+					params = ajax.params;
+				}
+				
+				//beforeLoad
+				trigger_event(ajax.beforeLoad);
+				
 				//ajax
-				if (options.method === 'get') {
-					$.get(options.file, params, function(data) {
+				if (ajax.method === 'get') {
+					$.get(ajax.file, params, function(data) {
 						modal.html(data);
 						close_button(); //add close button if necessary
+						//openModal if not opened
+						if (openAfter) {
+							open_modal();
+						}
+						//onSucess
+						trigger_event(ajax.onSuccess);						
+					}).error(function() {
+					    //onError
+						trigger_event(ajax.onError);
 					});
 				} else {
-					$.post(options.file, params, function(data) {
+					$.post(ajax.file, params, function(data) {
 						modal.html(data);
 						close_button(); //add close button if necessary
+						//openModal if not opened
+						if (openAfter) {
+							open_modal();
+						}
+						//onSucess
+						trigger_event(ajax.onSuccess);						
+					}).error(function() {
+					    //onError
+						trigger_event(ajax.onError);
 					});
 				}
 				return;
@@ -125,6 +170,10 @@
 			
 			/* Method that actually displays our modal */
 			function open_modal() {
+			
+				//beforeOpen
+				trigger_event(options.beforeOpen);
+			
 				//how to close
 				overlay.click(function() {
 					close_modal();
@@ -249,6 +298,8 @@
                 overlay.remove();
                 modal.remove();
                 modal_wrapper.remove();
+                //afterClose
+				trigger_event(options.afterClose);
             }
 
 			/* Method that handles key events (ESC key only for now) */
@@ -283,9 +334,15 @@
 			/* Method that determines what to do with close button */
 			function close_button() {
 				if (options.closeButton === true) {
-					modal.prepend("<button type='button' class='" + definitions.close_button + "'>Ã—</button>");
+					modal.prepend("<button type='button' class='" + definitions.close_button + "'>×</button>");
 					modal.find("." + definitions.close_button).unbind('click');
 					modal.find("." + definitions.close_button).bind('click', close_modal);
+				}
+			}
+			
+			function trigger_event(funct) {
+				if ($.isFunction(funct)) {
+					funct();
 				}
 			}
 		}
