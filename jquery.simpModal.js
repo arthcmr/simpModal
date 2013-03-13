@@ -23,7 +23,7 @@
 				ajax: {},
 				content: null,
 				width: null,
-				closeButton: false,
+				closeButton: true,
 				speed: 200,
 				transition: 'fade',
                 clickEnter: false,
