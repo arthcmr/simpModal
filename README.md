@@ -33,20 +33,30 @@ I built **simpModal** because I wanted flexibility. Many of the modal plugins I'
 It's super simple to open a new modal using simpModal. The following code would do!
 
 	$.simpModal({
-	content: "This is super cool!"
+		content: "This is super cool!"
 	});
 
-And there are many possible settings which are simple to use as well. This would change the default animation, speed, and add an extra CSS class to the modal:
+And there are many possible settings, which are simple to use as well. This would change the default animation, speed, and add an extra class to the modal:
 
 	$.simpModal({
-	content: "This is super cool!",
-	transition: "slideUp",
-	speed: 200
-	extraClass: "myModalClass"	
+		content: "This is super cool!",
+		transition: "slideUp",
+		speed: 200
+		extraClass: "myModalClass"	
 	});
-	
 
-See [this page](http://www.arthurcamara.com/simpmodal) or download simpModal to see more examples and various settings.
+Advanced settings using Ajax and callback functions are equally simple to implement using simpModal:
+	
+	$.simpModal({
+		ajax: {
+			file: 'coolpage.php',
+			onSuccess: function() {
+					alert('Yay!');
+				}
+			}
+	});
+
+See [this page](http://www.arthurcamara.com/simpmodal) or download simpModal to see more examples and all possible settings.
 
 ---
 ## Download
