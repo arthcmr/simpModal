@@ -1,7 +1,7 @@
 (function($) {
 	$.extend({
 		simpModal: function(options) { 
-		
+
 			/* class and id definitions */
 			var definitions = {
 				modal_wrapper: 'simp_modal_wrapper',
@@ -12,7 +12,7 @@
                 dataclose_parameter: 'data-close',
                 dataclose_value: 'true'
 			}; 
-			
+
 			/* default options */
 			var defaults = {
 				top: 100,
@@ -23,28 +23,31 @@
 				ajax: {},
 				content: null,
 				width: null,
-				closeButton: true,
+				closeButton: false,
 				speed: 200,
 				transition: 'fade',
-                clickEnter: false,
+                clickEnter: true,
                 closeEsc: true,
                 close: false,
                 beforeOpen: null,
-                afterClose: null
+                afterClose: null,
+                lock: false
 			};
 			options = $.extend(defaults, options); 
-			
+
 			if(options.close === true) {
 				close_modal();
 				return;
 			}
-			
+
 			/* add necessary html markup */
 			var modal_all = $("<div id='" + definitions.modal_wrapper + "' class='" + definitions.modal_wrapper + "'><div id='" + definitions.modal_overlay + "' class='" + definitions.modal_overlay + "'></div><div id='" + definitions.modal + "' class='" + definitions.modal + "'></div></div>");
 			$("body").append(modal_all);
 			overlay = $("#" + definitions.modal_overlay);
 			modal = $("#" + definitions.modal);
 			modal_wrapper = $("#" + definitions.modal_wrapper); 
+			
+			var html_overflow = $("html").css('overflow');
             
             /* define fixed styles */
             modal_wrapper.css({
@@ -69,7 +72,7 @@
                 "height": "100%",
                 "width": "100%"
             });
-			
+
 			/* handle specific option */
 			if (options.width !== null) {
 				// force width
@@ -99,7 +102,7 @@
 				// apply extra class
 				modal.addClass(options.extraClass);
 			} 
-			
+
 			/* Open Modal or load AJAX */
 			if ($.isEmptyObject(options.ajax)) {
 				close_button(); //add close button if necessary
@@ -116,25 +119,25 @@
 					onError: null,
 					onSuccess: null
 				};
-				
+
 				var ajax = $.extend(ajax_defaults, options.ajax); 				
 				var openAfter = true;
-				
+
 				if (ajax.loadingMessage !== null) {
 					loading = "<div class='" + definitions.loading + "'>" + ajax.loadingMessage + "</div>";
 					modal.html(loading);
 					open_modal();
 					openAfter = false;
 				}
-				
+
 				var params = {};
 				if (ajax.params !== null) {
 					params = ajax.params;
 				}
-				
+
 				//beforeLoad
 				trigger_event(ajax.beforeLoad);
-				
+
 				//ajax
 				if (ajax.method === 'get') {
 					$.get(ajax.file, params, function(data) {
@@ -167,24 +170,32 @@
 				}
 				return;
 			} 
-			
+
 			/* Method that actually displays our modal */
 			function open_modal() {
-			
+
 				//beforeOpen
 				trigger_event(options.beforeOpen);
-			
-				//how to close
-				overlay.click(function() {
-					close_modal();
-				});
-                var dataclose_btns = modal.find("*["+definitions.dataclose_parameter+"='"+definitions.dataclose_value+"']");
-                dataclose_btns.click(function() {
-					close_modal();
-				});
-                
-				//bind esc key event
-				$('html').bind('keyup', key_events);
+
+				if(options.lock === false) {
+					
+					//how to close
+					overlay.click(function() {
+						close_modal();
+					});
+					
+					//bind esc key event
+					$('html').bind('keyup', key_events);
+					
+					var dataclose_btns = modal.find("*["+definitions.dataclose_parameter+"='"+definitions.dataclose_value+"']");
+	                	dataclose_btns.click(function() {
+						close_modal();
+					});
+				
+				}
+                //overflow
+                //$("html").css({ 'height':'100%', 'overflow': 'hidden'});
+				
 				//measurements
 				var modal_height = modal.outerHeight();
 				var modal_width = modal.outerWidth();
@@ -291,6 +302,8 @@
                 
 				//unbind esc event
 				$('html').unbind('keyup');
+				//overflow
+                //$("html").css({ 'height': 'auto', 'overflow' : html_overflow });
 			} 
             
             /* Method that removes DOM elements */
@@ -334,12 +347,12 @@
 			/* Method that determines what to do with close button */
 			function close_button() {
 				if (options.closeButton === true) {
-					modal.prepend("<button type='button' class='" + definitions.close_button + "'>×</button>");
+					modal.prepend("<button type='button' class='" + definitions.close_button + "'>&times;</button>");
 					modal.find("." + definitions.close_button).unbind('click');
 					modal.find("." + definitions.close_button).bind('click', close_modal);
 				}
 			}
-			
+
 			function trigger_event(funct) {
 				if ($.isFunction(funct)) {
 					funct();
