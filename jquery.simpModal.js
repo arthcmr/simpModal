@@ -100,7 +100,16 @@
 			}
 			if (options.extraClass !== null) {
 				// apply extra class
-				modal.addClass(options.extraClass);
+				var extraClass = '';
+				//extraClass may be an array
+				if (options.extraClass instanceof Array) {
+					for(var i in options.extraClass) {
+						extraClass = options.extraClass.join(' ');
+					}
+				} else {
+					extraClass = options.extraClass;
+				}
+				modal.attr('class', definitions.modal_wrapper + ' ' + extraClass);
 			} 
 
 			/* Open Modal or load AJAX */
