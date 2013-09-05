@@ -31,7 +31,8 @@
                 close: false,
                 beforeOpen: null,
                 afterClose: null,
-                lock: false
+                lock: false,
+                iframe: {},
 			};
 			options = $.extend(defaults, options); 
 
@@ -39,6 +40,9 @@
 				close_modal();
 				return;
 			}
+
+			//remove if it already exists
+			$("#" + definitions.modal).remove();
 
 			/* add necessary html markup */
 			var modal_all = $("<div id='" + definitions.modal_wrapper + "' class='" + definitions.modal_wrapper + "'><div id='" + definitions.modal_overlay + "' class='" + definitions.modal_overlay + "'></div><div id='" + definitions.modal + "' class='" + definitions.modal + "'></div></div>");
@@ -109,8 +113,23 @@
 				} else {
 					extraClass = options.extraClass;
 				}
-				modal.attr('class', definitions.modal_wrapper + ' ' + extraClass);
+				modal.attr('class', definitions.modal + ' ' + extraClass);
 			} 
+
+			if (!$.isEmptyObject(options.iframe)) {
+				//insert iframe if it exists
+				var iframe_defaults = {
+					id: 'iframe',
+					file: '',
+					width: '100%',
+					height: '500'
+				};
+
+				var iframe = $.extend(iframe_defaults, options.iframe);
+				var iframe_html = "<iframe id='" + iframe.id + "' border='0' src='" + iframe.file + "' width='" + iframe.width + "' height='" + iframe.height + "' scrollbars='auto'></iframe>";
+
+				modal.html(iframe_html);
+			}
 
 			/* Open Modal or load AJAX */
 			if ($.isEmptyObject(options.ajax)) {
